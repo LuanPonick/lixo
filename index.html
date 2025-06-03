@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .circle{
+            background-color: black;
+
+            width: 300px;
+            height: 300px;
+            
+            border-radius: 300px;
+            
+        }
+
+        .middle .circle {
+            transform: translateY(30%);
+            margin-inline:-40px ;
+        }
+        .cilinder{
+            width: 300px;
+            height: 500px;
+            background-color: black;
+        }
+        .middle{
+            display: flex;
+            align-items: flex-end;
+            
+        }
+        .head{
+            transform: translateY(50%);
+            
+        }
+        .head .circle{            
+            width: 320px;
+            height: 320px;
+        }
+        .a{    
+            transform: translateY(-50%);
+
+            display: flex;
+            flex-direction: column;
+            width: fit-content;
+            align-items: center;
+
+            rotate: 90deg;
+            
+            position: fixed;
+            top: 50%;
+            left: -150%;            
+        }
+        .animar {
+        animation: deslizar 4s linear forwards;
+        }
+        @keyframes deslizar {
+        from {
+            left: -700px;
+        }
+        to {
+            left: 120vw; /* Vai até o final da tela */
+        }
+        }
+        button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="a" id="foda">
+        <div class="head">
+            <div class="circle"></div>
+        </div>
+        <div class="middle">
+            <div class="circle"></div>
+            <div class="cilinder"></div>
+            <div class="circle"></div>
+        </div>        
+    </div>
+    <button id="btn" onclick="iniciarAnimacao()">Iniciar Animação</button>
+    <script>
+        function iniciarAnimacao(teste) {
+            
+            const objeto = document.getElementById('foda');
+            const botao = document.getElementById('btn');
+            botao.disabled = true;
+            // Remove e reaplica a classe para permitir rodar várias vezes
+            objeto.classList.remove('animar');
+            
+            // Força o reflow para reiniciar a animação
+            void objeto.offsetWidth;
+            
+            objeto.classList.add('animar');
+
+            setTimeout(() => {
+                botao.disabled = false;
+            }, 4000); // 10000 milissegundos = 10 segundos
+        }
+    </script>
+</body>
+</html>
